@@ -1,0 +1,5 @@
+nonebot2
+nonebot-adapter-onebot
+psmb-client
+hitmc-messages
+pydantic

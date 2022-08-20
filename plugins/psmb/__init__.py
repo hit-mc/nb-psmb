@@ -1,7 +1,5 @@
 import asyncio
-from email import message
 import re
-from typing import Tuple
 
 from nonebot import get_driver
 from nonebot.adapters import Event

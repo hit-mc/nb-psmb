@@ -21,10 +21,9 @@ driver.register_adapter(ONEBOT_V11Adapter)
 
 # Please DO NOT modify this file unless you know what you are doing!
 # As an alternative, you should use command `nb` or modify `pyproject.toml` to load plugins
-nonebot.load_from_toml("pyproject.toml")
+nonebot.load_from_toml("psmb.toml")
 
 # Modify some config / config depends on loaded configs
-# 
 # config = driver.config
 # do something...
 

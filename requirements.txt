@@ -1,5 +1,14 @@
+# Nonebot
 nonebot2
-nonebot-adapter-onebot
+nonebot-adapter-kook
+pydantic~=1.9.2
+
+# Logger
+loguru~=0.6.0
+
+# Nonebot Drivers
+httpx
+
+# PSMB Libraries
 psmb-client
 hitmc-messages
-pydantic

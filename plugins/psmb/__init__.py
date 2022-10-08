@@ -4,12 +4,14 @@ import re
 from nonebot import get_driver
 from nonebot.adapters import Event
 from nonebot import on_message, get_bot
-from hitmc_messages import (PlayerChatMessage,
-                            Message,
-                            PlayerAdvancementMessage,
-                            MessageType,
-                            PlayerDeathMessage,
-                            Dispatcher)
+from hitmc_messages import (
+    PlayerChatMessage,
+    Message,
+    PlayerAdvancementMessage,
+    MessageType,
+    PlayerDeathMessage,
+    Dispatcher
+)
 
 from psmb_client.guardian import Guardian
 from loguru import logger
@@ -25,14 +27,28 @@ dispatcher = Dispatcher()
 
 async def feed_packet(packet: bytes):
     return dispatcher.feed_packet(packet)
-client: Guardian = Guardian(plugin_config.psmb_host, plugin_config.psmb_port,
-                            plugin_config.psmb_topic, plugin_config.client_id, feed_packet)
-base_msg = Message(client_name=plugin_config.client_name,
-                   client_id=plugin_config.client_id,
-                   msg_type=MessageType.PLAYER_CHAT,
-                   content='')
+
+
+client: Guardian = Guardian(
+    plugin_config.psmb_host,
+    plugin_config.psmb_port,
+    plugin_config.psmb_topic,
+    plugin_config.client_id,
+    feed_packet
+)
+
+base_msg = Message(
+    client_name=plugin_config.client_name,
+    client_id=plugin_config.client_id,
+    msg_type=MessageType.PLAYER_CHAT,
+    content=''
+)
+
 server_list_daemon = ServerListDaemon(
-    base_msg, client, dispatcher, plugin_config.group_id)
+    base_msg,
+    client, dispatcher,
+    plugin_config.group_server_mapping
+)
 
 
 def format_chat(pcm: PlayerChatMessage):
@@ -46,8 +62,12 @@ def _(msg: PlayerChatMessage):
     bot = get_bot()
     if msg.content.startswith(('!', '！')):
         return
-    asyncio.create_task(bot.send_group_msg(
-        group_id=plugin_config.group_id, message=format_chat(msg)))
+    asyncio.create_task(
+        bot.send_group_msg(
+            group_id=plugin_config.group_id,
+            message=format_chat(msg)
+        )
+    )
 
 
 @dispatcher.on(MessageType.PLAYER_DEATH)
